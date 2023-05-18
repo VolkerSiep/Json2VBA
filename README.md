@@ -1,5 +1,5 @@
 # Json2VBA
-A fast json parser for VBA
+A fast and ruthless json parser for VBA
 
 ## What is this, another json parser?
 Despite what everybody says, I had a hard time finding a json parser in VBA for Excel that suits my needs. Sure, there is the famous VBA-JSON by Tim Hall (https://github.com/VBA-tools/VBA-JSON), but though being complete and a good library, it turned out to cause a noticable performance impact for my applications. Then there is VBA-JSON-parser by omegastripes (https://github.com/omegastripes/VBA-JSON-parser) with a lot of nice additional functionality, but while I'm really a fan of copyleft software, I'm also needing this for development within the industry I work, so at least in this case, I cannot use components licensed as GPLv3.
@@ -15,6 +15,8 @@ But the above can be modified with the same result to for instance
     {"key1" $ "value" Ø "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
 
 This is by design because I decide not to use any time on validation, as I trust my json-rpc server to get the format right. Needless to say, I refer to the NO-WARRANTY clausel in the used MIT license terms. 
+
+**For parsing 12000 json strings in average as large as in the `test2`, Json2VBA uses 0.5 seconds, while for instance VBA-JSON required 7 seconds.**
 
 **In conclusion: If you need something slow that also validates the incoming json, this library is not for you.**
 
