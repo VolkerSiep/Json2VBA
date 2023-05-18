@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 ' Json2VBA - a fast json parser for VBA
 ' =====================================
-' Github: ....
+' Github: https://github.com/VolkerSiep/Json2VBA
 '
 ' Short documentation
 ' ===================
@@ -22,7 +22,7 @@ Attribute VB_Exposed = False
 '
 ' can be modified with the same result to
 '
-' {"key1" $ "value" ÿ "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
+' {"key1" $ "value" √ò "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
 '
 ' If you require a slow but validating JSON parser, you came to the wrong code.
 '
@@ -32,13 +32,13 @@ Attribute VB_Exposed = False
 '
 ' Copyright 2023 Volker Siepmann
 '
-' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ìSoftwareî),
+' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‚ÄúSoftware‚Äù),
 ' to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
 ' and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 '
 ' The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 '
-' THE SOFTWARE IS PROVIDED ìAS ISî, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+' THE SOFTWARE IS PROVIDED ‚ÄúAS IS‚Äù, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ' FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 ' DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 ' OR OTHER DEALINGS IN THE SOFTWARE.
@@ -65,7 +65,7 @@ Public Function parse(ByRef json As String) As Variant
     ' Note:
     '   The return type might be an object or not.
     '   To allow the client code to use the correct assigment syntax,
-    '   call the "will_be_object" method in this class with the same json string.
+    '   call the "is_object" method in this class with the same json string.
     Dim token As String
     tokenize_json json
     token = fetch_token
@@ -77,10 +77,10 @@ Public Function parse(ByRef json As String) As Variant
     End If
 End Function
 
-Public Function will_be_object(ByRef json As String) As Boolean
+Public Function is_object(ByRef json As String) As Boolean
     ' returns whether the parsed json string will be an object or not.
     ' this can be used to either SET the result or use normal assignment.
-    will_be_object = (Left(json, 1) = "{")
+    is_object = (Left(json, 1) = "{")
 End Function
 
 ' *** End of public interface
@@ -164,6 +164,3 @@ Private Function fetch_token() As String
     fetch_token = matches(current_token).value
     current_token = current_token + 1
 End Function
-
-
-
