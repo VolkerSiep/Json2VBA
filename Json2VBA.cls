@@ -7,8 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-' Json2VBA - a fast json parser for VBA
-' =====================================
+' Json2VBA V0.1 - a fast json parser for VBA
+' ==========================================
 ' Github: https://github.com/VolkerSiep/Json2VBA
 '
 ' Short documentation
