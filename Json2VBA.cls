@@ -7,8 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-' Json2VBA V0.1 - a fast json parser for VBA
-' ==========================================
+' Json2VBA V0.1.1 - a fast json parser for VBA
+' ============================================
 ' Github: https://github.com/VolkerSiep/Json2VBA
 '
 ' Short documentation
@@ -49,7 +49,7 @@ Private regex_token As RegExp
 Private matches As Object
 Private current_token As Integer
 Private content As Variant
-
+Private dec_sep As String
 
 ' ***  Public interface
 
@@ -94,6 +94,7 @@ Private Sub class_initialize()
     Set regex_token = New RegExp
     regex_token.Pattern = RE_TOKEN
     regex_token.Global = True
+    dec_sep = Mid(Format(1000, "#,##0.00"), 6, 1) ' this works while Application.DecimalSeparator doesn't
 End Sub
 
 Private Function parse_next(token As String) As Variant
@@ -111,8 +112,15 @@ Private Function parse_next(token As String) As Variant
     Case "n"
         parse_next = Null
     Case Else ' must be a number
-        parse_next = CDbl(token) ' todo: need to replace . with , if that is decimal separator?
+        parse_next = cdbl2(token)
     End Select
+End Function
+
+Private Function cdbl2(value As Variant) As Variant
+    If dec_sep = "," Then
+        value = Replace(value, ".", ",")
+    End If
+    cdbl2 = CDbl(value)
 End Function
 
 
@@ -164,3 +172,4 @@ Private Function fetch_token() As String
     fetch_token = matches(current_token).value
     current_token = current_token + 1
 End Function
+
