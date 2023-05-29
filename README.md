@@ -78,6 +78,11 @@ You only really need the `Json2VBA.cls` file and import it into your Excel proje
 | Microsoft VBScript Regular Expressions 5.5 | Used by Json2VBA to efficiently convert the input to a list of tokens  |
 | Microsoft Scripting Runtime                | To be able to create dictionary structures (`Scripting.Dictionary`)    |
 
+## Support and questions
+
+As you might have noticed, this project is not (yet) suffering from an overwhelming user base. If you have a question, suggestion or otherwise any comment, pleast just use the issue tracker to create a new issue.
+I will probably read and react to it soon after.
+
 ## Developments and Contributions
 
 I like this to be small and consise, and most of all: performant. And as it is, it should cover the intended needs.
