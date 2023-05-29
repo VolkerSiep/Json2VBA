@@ -80,7 +80,7 @@ You only really need the `Json2VBA.cls` file and import it into your Excel proje
 
 ## Support and questions
 
-As you might have noticed, this project is not (yet) suffering from an overwhelming user base. If you have a question, suggestion or otherwise any comment, pleast just use the issue tracker to create a new issue.
+As you might have noticed, this project is not (yet) suffering from an overwhelming user base. If you have a question, suggestion or otherwise any comment, please just use the issue tracker to create a new issue.
 I will probably read and react to it soon after.
 
 ## Developments and Contributions
