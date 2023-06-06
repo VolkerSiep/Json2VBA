@@ -1,7 +1,8 @@
 # Change log
 
-## V0.1.1 (Released May 23rd 2023)
+## V0.2 (main branch - not yet released)
 - Consider "," as decimal separator when parsing numbers
+- Replace `\t` and `\n` from json strings with `vbCrLf` and `vbTab`
 
 ## V0.1 (Released May 18th 2023)
 - initial release
