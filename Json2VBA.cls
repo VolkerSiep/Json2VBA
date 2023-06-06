@@ -7,9 +7,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-' Json2VBA V0.1.1 - a fast json parser for VBA
-' ============================================
-' Github: https://github.com/VolkerSiep/Json2VBA
+' Json Parser
+' ===========
+' Github: ....
 '
 ' Short documentation
 ' ===================
@@ -104,7 +104,7 @@ Private Function parse_next(token As String) As Variant
     Case "["
         parse_next = parse_array
     Case """"
-        parse_next = Mid(token, 2, Len(token) - 2)
+        parse_next = parse_string(token)
     Case "t"
         parse_next = True
     Case "f"
@@ -123,6 +123,10 @@ Private Function cdbl2(value As Variant) As Variant
     cdbl2 = CDbl(value)
 End Function
 
+Private Function parse_string(token As String) As String
+    parse_string = Replace(Replace(Mid(token, 2, Len(token) - 2), "\n", vbCrLf), "\t", vbTab)
+End Function
+
 
 Private Function parse_dict() As Scripting.Dictionary
     Dim token As String
@@ -135,7 +139,7 @@ Private Function parse_dict() As Scripting.Dictionary
             Set parse_dict = result
             Exit Function
         End If
-        result.Add Mid(token, 2, Len(token) - 2), parse_next(fetch_token)
+        result.Add parse_string(token), parse_next(fetch_token)
     Wend
 End Function
 
@@ -172,4 +176,3 @@ Private Function fetch_token() As String
     fetch_token = matches(current_token).value
     current_token = current_token + 1
 End Function
-
