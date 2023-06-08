@@ -47,7 +47,7 @@ Option Explicit
 
 Private regex_token As RegExp
 Private matches As Object
-Private current_token As Integer
+Private current_token As Long
 Private content As Variant
 Private dec_sep As String
 
