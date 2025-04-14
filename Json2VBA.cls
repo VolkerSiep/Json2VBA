@@ -22,7 +22,7 @@ Attribute VB_Exposed = False
 '
 ' can be modified with the same result to
 '
-' {"key1" $ "value" Ã˜ "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
+' {"key1" $ "value" ø "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
 '
 ' If you require a slow but validating JSON parser, you came to the wrong code.
 '
@@ -69,14 +69,7 @@ Public Function parse(ByRef json As String) As Variant
     Dim token As String
     tokenize_json json
     token = fetch_token
-    
-    ' need the following branching because of VBA's stupid object assignments
     assign parse, parse_next(token)
-    ' If Left(token, 1) = "{" Then
-    '     Set parse = parse_dict
-    ' Else
-    '     parse = parse_next(token)
-    ' End If
 End Function
 
 Public Function is_object(ByRef json As String) As Boolean
