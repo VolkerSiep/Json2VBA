@@ -22,7 +22,7 @@ Attribute VB_Exposed = False
 '
 ' can be modified with the same result to
 '
-' {"key1" $ "value" Ø "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
+' {"key1" $ "value" Ã˜ "key2" @ [Ops1.2y, 3.14=Pi, 5.3e-3], "key3": [true really!, false maybe, nullification]}
 '
 ' If you require a slow but validating JSON parser, you came to the wrong code.
 '
@@ -32,13 +32,13 @@ Attribute VB_Exposed = False
 '
 ' Copyright 2023 Volker Siepmann
 '
-' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”),
+' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the â€œSoftwareâ€),
 ' to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
 ' and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 '
 ' The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 '
-' THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+' THE SOFTWARE IS PROVIDED â€œAS ISâ€, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 ' FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 ' DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 ' OR OTHER DEALINGS IN THE SOFTWARE.
@@ -69,12 +69,14 @@ Public Function parse(ByRef json As String) As Variant
     Dim token As String
     tokenize_json json
     token = fetch_token
+    
     ' need the following branching because of VBA's stupid object assignments
-    If Left(token, 1) = "{" Then
-        Set parse = parse_dict
-    Else
-        parse = parse_next(token)
-    End If
+    assign parse, parse_next(token)
+    ' If Left(token, 1) = "{" Then
+    '     Set parse = parse_dict
+    ' Else
+    '     parse = parse_next(token)
+    ' End If
 End Function
 
 Public Function is_object(ByRef json As String) As Boolean
@@ -163,9 +165,14 @@ Private Function parse_array() As Variant
         ElseIf num > UBound(result) Then
             ReDim Preserve result(1 To 2 * (num - 1))
         End If
-        result(num) = parse_next(token)
+        assign result(num), parse_next(token)
     Wend
 End Function
+
+Private Sub assign(ByRef varLeft As Variant, ByRef varRight As Variant)
+    ' Helper function provided by cristianbuse on github, issue ref. #1
+    If IsObject(varRight) Then Set varLeft = varRight Else varLeft = varRight
+End Sub
 
 Private Sub tokenize_json(ByRef json As String)
     Set matches = regex_token.Execute(json)
@@ -176,3 +183,4 @@ Private Function fetch_token() As String
     fetch_token = matches(current_token).value
     current_token = current_token + 1
 End Function
+

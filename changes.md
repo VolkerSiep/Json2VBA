@@ -1,6 +1,8 @@
 # Change log
 
 ## V0.2 (main branch - not yet released)
+- corrected code to handle dictionaries within containers (input from user cristianbuse@github)
+- added a small test module
 - Consider "," as decimal separator when parsing numbers
 - Replace `\t` and `\n` from json strings with `vbCrLf` and `vbTab`
 - Declare `current_token` as `long` to prevent overflow for large json data sets
