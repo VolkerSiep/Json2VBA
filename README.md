@@ -6,7 +6,10 @@ Despite what everybody says, I had a hard time finding a json parser in VBA for 
 
 While looking around, I also found this blog by Daniel Ferry (https://medium.com/swlh/excel-vba-parse-json-easily-c2213f4d8e7a), and honestly, I got the approach of using regular expressions from here, and consequently the idea to first tokenize the entire json file. But I wished to preserve the data types.
 
-**So what did I do?** I hereby implemented a regular expression based json parser that assumes valid json and only does a minimum of syntax interpretation to extract the data at hand. This means for instance: The parser will parse just fine the following
+In the meantime, there is another VBA implementation available by Cristian Buse (https://github.com/cristianbuse/VBA-FastJSON). This is a highly performant code, and a really impressive piece of low-level programming *(reminds me a bit on how I basically coded assembly in AmigaBasic, using mostly only PEEK, POKE, and CALL 🤓)*. This parser, utilizing his own dictionary implementation (https://github.com/cristianbuse/VBA-FastDictionary) is extremely fast for larger json structures (several MB). Have a look at that one, too.
+The only limitation of the json parser (not the dictionary anymore) is that it uses `kernel32.dll` calls. On my work-PC, the MS Defender settings blow up my Excel each time they even only smell one of these.
+
+**So what did I do?** I implemented a regular expression based json parser that assumes valid json and only does a minimum of syntax interpretation to extract the data at hand. This means for instance: The parser will parse just fine the following
 
     {"key1": "value", "key2": [1.2, 3.14, 5.3e-3], "key3": [true, false, null]}
 
